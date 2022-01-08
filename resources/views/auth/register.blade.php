@@ -45,8 +45,8 @@
                             <div class="col-md-6">
 
                                 <select id="type" name="type" class="form-control @error('type') is-invalid @enderror" value="{{ old('type') }}" required autocomplete="type">
-                                    <option value="{{ \App\Models\User::TRINEE}}">متدرب</option>
-                                    <option value="{{ \App\Models\User::HOC}}">شركة</option>
+                                    <option value="{{\App\Models\User::TRINEE}}">متدرب</option>
+                                    <option value="{{\App\Models\User::HOC}}">شركة</option>
                                 </select>
                                 
                                 @error('type')

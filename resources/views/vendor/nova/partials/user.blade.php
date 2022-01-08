@@ -17,11 +17,5 @@
                 {{ __('Logout') }}
             </a>
         </li>
-        <li>
-            <a href="{{ route('switch', app()->getlocale() == 'ar' ? 'en' : 'ar') }}"
-                class="block no-underline text-90 hover:bg-30 p-3">
-                عربي | EN
-            </a>
-        </li>
     </ul>
 </dropdown-menu>

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -14,6 +15,16 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public static function booted()
+    {
+        static::created(function (User $user) {
+            if ($user->isHOC()) {
+                $user->company()->create([
+                    'name'  => $user->name
+                ]);
+            }
+        });
+    }
 
     // User Types.
     public const TRINEE = '1';
@@ -33,6 +44,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type'
     ];
 
     /**
@@ -54,6 +66,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    /** Methods */
+
+    public function isTrinee()
+    {
+        return $this->type == static::TRINEE;
+    }
+
+    public function isHOC()
+    {
+        return $this->type == static::HOC;
+    }
+
+    public function isAdmin()
+    {
+        return $this->type == static::ADMIN;
+    }
+
     /** Relations */
 
     public function reports(): HasMany
@@ -64,6 +94,11 @@ class User extends Authenticatable
     public function trainingRequests(): HasMany
     {
         return $this->hasMany(TrainingRequest::class);
+    }
+
+    public function company(): HasOne
+    {
+        return $this->hasOne(Company::class);
     }
 
     public function specializations(): BelongsToMany

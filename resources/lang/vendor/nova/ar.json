@@ -416,5 +416,19 @@
     "Customize": "تخصيص",
     "Update :resource: :title": "تحديث :resource: :title",
     "Update attached :resource: :title": "تحديث المرفق :resource: :title",
-    ":resource Details: :title": ":resource تفاصيل: :title"
+    ":resource Details: :title": ":resource تفاصيل: :title",
+    "Founder": "المؤسس",
+    "User": "المستخدم",
+    "Employee Number": "عدد الموظفين",
+    "City": "المدينة",
+    "Country": "الدولة",
+    "Companies": "الشركات",
+    "Company": "الشركة",
+    "Reason": "السبب",
+    "Reports": "البلاغات",
+    "Report": "بلاغ",
+    "Specialization Types": "أنواع التخصصات",
+    "Specialization Type": "نوع تخصص",
+    "Specializations": "التخصصات",
+    "Specialization": "التخصص"
 }

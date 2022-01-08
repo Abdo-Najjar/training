@@ -12,6 +12,14 @@ class Report extends Model
 
     protected $guarded = [];
 
+    public static function booted()
+    {
+        static::creating(function (Report $report) {
+            $report->user_id = user()->id;
+        });
+    }
+
+
     /** Relations */
 
     public function user(): BelongsTo

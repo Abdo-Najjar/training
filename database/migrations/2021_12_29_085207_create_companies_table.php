@@ -17,11 +17,11 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('founder');
+            $table->string('founder')->nullable();
             $table->foreignIdFor(User::class)->constrained();
-            $table->unsignedBigInteger('employee_number');
-            $table->string('city');
-            $table->string('country');
+            $table->unsignedBigInteger('employee_number')->default(1);
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
             $table->timestamps();
         });
     }
