@@ -5,7 +5,7 @@
 ```bash
  composer install
 
- .env.example .env
+ cp .env.example .env
 
  php artisan key:generate
 
