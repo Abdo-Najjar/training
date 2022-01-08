@@ -430,5 +430,13 @@
     "Specialization Types": "أنواع التخصصات",
     "Specialization Type": "نوع تخصص",
     "Specializations": "التخصصات",
-    "Specialization": "التخصص"
+    "Specialization": "التخصص",
+    "Password Confirmation": "تأكيدة كلمة المرور",
+    "Email": "البريد الإلكتروني",
+    "Admin": "مشرف",
+    "Admins": "المشرفون",
+    "Trinees": "المتدربون",
+    "Trinee": "متدرب",
+    "HOCS": "رؤساء الشركات",
+    "HOC": "رئيس شركة"
 }

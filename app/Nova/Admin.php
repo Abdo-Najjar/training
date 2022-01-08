@@ -3,28 +3,29 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Password as RulePassword;
+use Laravel\Nova\Fields\Hidden;
+use Laravel\Nova\Fields\PasswordConfirmation;
 
-class Report extends Resource
+class Admin extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Report::class;
+    public static $model = \App\Models\User::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'name';
 
     /**
      * The columns that should be searched.
@@ -32,9 +33,20 @@ class Report extends Resource
      * @var array
      */
     public static $search = [
-        'id',
-        'reason'
+        'id', 'name', 'email',
     ];
+
+    /**
+     * Build an "index" query for the given resource.
+     *
+     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public static function indexQuery(NovaRequest $request, $query)
+    {
+        return $query->where('type', \App\Models\User::ADMIN);
+    }
 
     /**
      * Get the fields displayed by the resource.
@@ -47,19 +59,21 @@ class Report extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make(__('User'), 'user', Trinee::class)->sortable(),
+            Text::make(__('Name'), 'name')->sortable()->rules('required', 'min:3', 'max:255'),
 
-            BelongsTo::make(__('Company'), 'company', Company::class)->sortable(),
-
-            Textarea::make(__('Reason'), 'reason'),
-
-            Text::make(__('Reason'), 'reason')->displayUsing(function ($text) {
-                if (strlen($text) > 30) {
-                    return Str::substr($text, 0, 30) . '...';
-                }
-                return $text;
-            })->onlyOnIndex()
+            Text::make(__('Email'), 'email')
                 ->sortable()
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
+
+            Password::make(__('Password'), 'password')->rules('required',  RulePassword::default()->min(6))->onlyOnForms(),
+
+            PasswordConfirmation::make(__('Password Confirmation'), 'password_confirmation')->onlyOnForms(),
+
+            Hidden::make('type')->default(function () {
+                return \App\Models\User::ADMIN;
+            })
         ];
     }
 
@@ -114,7 +128,7 @@ class Report extends Resource
      */
     public static function label()
     {
-        return __('Reports');
+        return __('Admins');
     }
 
     /**
@@ -124,6 +138,6 @@ class Report extends Resource
      */
     public static function singularLabel()
     {
-        return __('Report');
+        return __('Admin');
     }
 }

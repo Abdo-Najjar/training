@@ -55,7 +55,7 @@ class Company extends Resource
 
             Text::make(__('Founder'), 'founder')->sortable()->rules('required', 'min:3', 'max:255'),
 
-            BelongsTo::make(__('User'), 'user', User::class)->sortable(),
+            BelongsTo::make(__('User'), 'user', HOC::class)->sortable(),
 
             Number::make(__('Employee Number'), 'employee_number')->rules('required', 'numeric', 'min:1')->sortable(),
 

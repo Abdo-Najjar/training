@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\App;
 
 class Report extends Model
 {
@@ -14,9 +15,11 @@ class Report extends Model
 
     public static function booted()
     {
-        static::creating(function (Report $report) {
-            $report->user_id = user()->id;
-        });
+        if (!App::runningInConsole()) {
+            static::creating(function (Report $report) {
+                $report->user_id = user()->id;
+            });
+        }
     }
 
 
