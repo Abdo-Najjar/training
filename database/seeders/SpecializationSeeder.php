@@ -16,10 +16,5 @@ class SpecializationSeeder extends Seeder
     public function run()
     {
         Specialization::factory()->count(20)->create();
-
-
-        // User::all()->each(function($user){
-
-        // });
     }
 }
