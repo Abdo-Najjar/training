@@ -3,19 +3,18 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Specialization extends Resource
+class User extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Specialization::class;
+    public static $model = \App\Models\User::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -30,7 +29,7 @@ class Specialization extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name'
+        'id', 'name', 'email',
     ];
 
     /**
@@ -44,9 +43,15 @@ class Specialization extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make(__('Specialization Type'), 'specializationType', SpecializationType::class)->sortable(),
+            Text::make(__('Name'), 'name')
+                ->sortable()
+                ->rules('required', 'max:255'),
 
-            Text::make(__('Name'), 'name')->sortable()->rules('required', 'min:3', 'max:255'),
+            Text::make(__('Email'), 'email')
+                ->sortable()
+                ->rules('required', 'email', 'max:254')
+                ->creationRules('unique:users,email')
+                ->updateRules('unique:users,email,{{resourceId}}'),
         ];
     }
 
@@ -84,6 +89,26 @@ class Specialization extends Resource
     }
 
     /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public static function label()
+    {
+        return __('Trinees');
+    }
+
+    /**
+     * Get the displayable singular label of the resource.
+     *
+     * @return string
+     */
+    public static function singularLabel()
+    {
+        return __('Trinee');
+    }
+
+    /**
      * Get the actions available for the resource.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -94,23 +119,30 @@ class Specialization extends Resource
         return [];
     }
 
-    /**
-     * Get the displayable label of the resource.
-     *
-     * @return string
-     */
-    public static function label()
+    public static function authorizedToCreate(Request $request)
     {
-        return __('Specializations');
+        return false; // depends on what you need. 
     }
 
     /**
-     * Get the displayable singular label of the resource.
+     * Determine if the current user can update the given resource.
      *
-     * @return string
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
      */
-    public static function singularLabel()
+    public function authorizedToUpdate(Request $request)
     {
-        return __('Specialization');
+        return false;
+    }
+
+    /**
+     * Determine if the current user can delete the given resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    public function authorizedToDelete(Request $request)
+    {
+        return false;
     }
 }

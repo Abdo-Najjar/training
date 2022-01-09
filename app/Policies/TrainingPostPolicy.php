@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Company;
+use App\Models\TrainingPost;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CompanyPolicy
+class TrainingPostPolicy
 {
     use HandlesAuthorization;
 
@@ -18,19 +18,19 @@ class CompanyPolicy
      */
     public function viewAny(User $user)
     {
-       return true;
+        return true;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\TrainingPost  $trainingPost
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Company $company)
+    public function view(User $user, TrainingPost $trainingPost)
     {
-       return true;
+        return true;
     }
 
     /**
@@ -41,30 +41,30 @@ class CompanyPolicy
      */
     public function create(User $user)
     {
-        return false;
+        return !$user->isAdmin();
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\TrainingPost  $trainingPost
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Company $company)
+    public function update(User $user, TrainingPost $trainingPost)
     {
-        return $user->isHOC();
+        return !$user->isAdmin() and $trainingPost->user_id == $user->id;
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Company  $company
+     * @param  \App\Models\TrainingPost  $trainingPost
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Company $company)
+    public function delete(User $user, TrainingPost $trainingPost)
     {
-        return false;
+        return $user->isAdmin() || $trainingPost->user_id == $user->id;
     }
 }

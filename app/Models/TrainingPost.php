@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
-class TrainingPost extends Model
+class TrainingPost extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia, BelongsToThrough;
 
     protected $guarded = [];
 
@@ -16,6 +20,16 @@ class TrainingPost extends Model
     public const TRINEE = '1';
     public const HOC = '2';
 
+
+    /** Mutations */
+
+    public function getTypeNameAttribute()
+    {
+        return [
+            static::TRINEE => 'طلب تدريب',
+            static::HOC    => 'فرصة تدريب'
+        ][$this->type];
+    }
 
     /** Relations */
 
@@ -27,5 +41,12 @@ class TrainingPost extends Model
     public function specialization(): BelongsTo
     {
         return $this->belongsTo(Specialization::class);
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(150)
+            ->height(150);
     }
 }

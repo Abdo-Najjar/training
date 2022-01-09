@@ -42,4 +42,9 @@ class CreateReport extends Action
             Textarea::make(__('Reason'), 'reason')->rules('required')
         ];
     }
+
+    public function name()
+    {
+        return 'إبلاغ';
+    }
 }

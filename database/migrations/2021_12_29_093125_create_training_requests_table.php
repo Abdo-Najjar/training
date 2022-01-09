@@ -21,7 +21,7 @@ class CreateTrainingRequestsTable extends Migration
             $table->foreignIdFor(Company::class)->constrained();
             $table->longText('message');
             $table->string('title');
-            $table->boolean('status')->default(true);
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

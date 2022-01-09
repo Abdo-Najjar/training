@@ -438,5 +438,18 @@
     "Trinees": "المتدربون",
     "Trinee": "متدرب",
     "HOCS": "رؤساء الشركات",
-    "HOC": "رئيس شركة"
+    "HOC": "رئيس شركة",
+    "Training Posts": "منشورات التدريب",
+    "Training Post": "منشور التدريب",
+    "Title": "العنوان",
+    "Type": "النوغ",
+    "Content": "المحتوى",
+    "Training Requests": "طلبات التدريب",
+    "Training Request": "طلب تدريب",
+    "Message": "الرسالة",
+    "File": "الملف",
+    "Add New File": "إضافة ملف",
+    "Update Profile" : "تعديل الملف الشخصي",
+    "E-mail address" : "البريد الإلكتروني",
+    "Save Profile" : "تحديث"
 }
