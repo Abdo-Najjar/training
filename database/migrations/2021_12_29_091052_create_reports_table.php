@@ -18,7 +18,7 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Company::class)->constrained();
+            $table->morphs('reportable');
             $table->longText('reason');
             $table->timestamps();
         });

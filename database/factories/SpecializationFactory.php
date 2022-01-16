@@ -16,7 +16,6 @@ class SpecializationFactory extends Factory
     {
         return [
             'name'                              => $this->faker->name,
-            'specialization_type_id'            => $this->faker->randomElement(SpecializationType::all())->id,
         ];
     }
 }

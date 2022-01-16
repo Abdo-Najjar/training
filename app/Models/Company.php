@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Company extends Model
 {
@@ -16,9 +17,9 @@ class Company extends Model
 
     /** Relations */
 
-    public function reports(): HasMany
+    public function reports(): MorphMany
     {
-        return $this->hasMany(Report::class);
+        return $this->morphMany(Report::class , 'reportable');
     }
 
     public function trainingRequests(): HasMany

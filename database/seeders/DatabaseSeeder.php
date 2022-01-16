@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CompanySeeder::class,
             ReportSeeder::class,
-            SpecializationTypeSeeder::class,
             SpecializationSeeder::class,
             TrainingPostSeeder::class,
             TrainingRequestSeeder::class

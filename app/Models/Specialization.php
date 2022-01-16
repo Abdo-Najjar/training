@@ -15,11 +15,6 @@ class Specialization extends Model
 
     /** Relations */
 
-    public function specializationType(): BelongsTo
-    {
-        return $this->belongsTo(SpecializationType::class);
-    }
-
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);

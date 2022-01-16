@@ -44,8 +44,6 @@ class Specialization extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make(__('Specialization Type'), 'specializationType', SpecializationType::class)->sortable(),
-
             Text::make(__('Name'), 'name')->sortable()->rules('required', 'min:3', 'max:255'),
         ];
     }

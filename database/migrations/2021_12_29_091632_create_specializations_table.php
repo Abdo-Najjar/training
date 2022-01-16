@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\SpecializationType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,7 +16,6 @@ class CreateSpecializationsTable extends Migration
         Schema::create('specializations', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignIdFor(SpecializationType::class)->constrained();
             $table->timestamps();
         });
     }

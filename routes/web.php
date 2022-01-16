@@ -21,3 +21,12 @@ Auth::routes();
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::view('/' , 'home')->name('home');
+
+Route::get('home/login' , function(){
+    return redirect()->route('home');
+});
+
+Route::get('/logout' , function(){
+    Auth::login();
+    return redirect() ->route('home');
+})->name('logout');

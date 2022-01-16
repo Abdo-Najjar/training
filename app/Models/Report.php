@@ -30,8 +30,8 @@ class Report extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function company(): BelongsTo
+    public function reportable()
     {
-        return $this->belongsTo(Company::class);
+        return $this->morphTo();
     }
 }
