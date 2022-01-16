@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -71,6 +72,13 @@ class TrainingPost extends Resource
                     return \App\Models\TrainingPost::TRINEE;
                 }
                 return \App\Models\TrainingPost::HOC;
+            }),
+            
+            MorphMany::make(__('Training Request'), 'requests', TrainingRequest::class)->canSee(function(){
+                if ($this->type and $this->type == \App\Models\TrainingPost::TRINEE) {
+                    return false;
+                }
+                return true;
             }),
 
             Hidden::make('user_id')->default(function () {

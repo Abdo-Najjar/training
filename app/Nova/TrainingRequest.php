@@ -8,6 +8,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -74,13 +75,19 @@ class TrainingRequest extends Resource
 
             BelongsTo::make(__('User'), 'user', Trinee::class)->sortable()->exceptOnForms(),
 
-            BelongsTo::make(__('Company'), 'company', Company::class)->sortable(),
-
             Trix::make(__('Message'), 'message')->rules('required'),
 
             Boolean::make(__('Status'), 'status')->canSee(function () {
                 return user()->isHOC();
             }),
+
+            MorphTo::make(__('Type'), 'requestable')
+            ->types([
+                Company::class,
+                TrainingPost::class
+            ])
+            ->sortable()
+            ->withoutTrashed(),
 
             Files::make(__('File'), 'default')
                 ->rules('nullable')

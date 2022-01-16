@@ -21,9 +21,9 @@ class TrainingRequest extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
-    public function trainingRequestable(): MorphTo
+    public function requestable(): MorphTo
     {
-        return $this->morphTo();
+        return $this->morphTo('requestable');
     }
 
     public function company(): BelongsTo

@@ -3,11 +3,11 @@
 namespace App\Nova;
 
 use App\Nova\Actions\CreateReport;
-use App\Nova\Actions\CreateTrainingRequest;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -65,7 +65,7 @@ class Company extends Resource
 
             Text::make(__('City'), 'city')->sortable()->rules('required', 'min:3', 'max:255'),
 
-            HasMany::make(__('Training Request'), 'trainingRequests', TrainingRequest::class)
+            MorphMany::make(__('Training Request'), 'requests', TrainingRequest::class)
         ];
     }
 
