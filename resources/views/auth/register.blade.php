@@ -1,7 +1,30 @@
+register.blade.php
+Who has access
+System properties
+Type
+PHP
+Size
+5 KB
+Storage used
+5 KB
+Location
+auth
+Owner
+Majdolein Mohammed Majdolein Mohammed
+Modified
+10 Jan 2022 by Majdolein Mohammed Majdolein Mohammed
+Opened
+14:24 by me
+Created
+15 Jan 2022
+Add a description
+Viewers can download
+
 @extends('layouts.app')
 
 @section('content')
 <div class="container">
+    <br><br><br><br><br><br><br><br><br><br>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -79,17 +102,20 @@
                             </div>
                         </div>
 
+                        <nav id="navbar" class="navbar">
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="getstarted scrollto">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
+                    </nav>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <br><br><br><br><br><br><br><br><br><br>
 </div>
 @endsection
