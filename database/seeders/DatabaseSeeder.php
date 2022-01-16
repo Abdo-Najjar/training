@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class,
             SpecializationSeeder::class,
             TrainingPostSeeder::class,
-            TrainingRequestSeeder::class
         ]);
     }
 }

@@ -49,6 +49,11 @@ class TrainingPost extends Model implements HasMedia
         return $this->morphMany(Report::class , 'reportable');
     }
 
+    public function trainingRequests(): MorphMany
+    {
+        return $this->morphMany(TrainingRequest::class, 'requestable');
+    }
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')

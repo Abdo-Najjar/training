@@ -18,7 +18,8 @@ class CreateTrainingRequestsTable extends Migration
         Schema::create('training_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Company::class)->constrained();
+            // $table->foreignIdFor(Company::class)->constrained();
+            $table->morphs('requestable');
             $table->longText('message');
             $table->string('title');
             $table->boolean('status')->default(false);

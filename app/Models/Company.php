@@ -19,12 +19,12 @@ class Company extends Model
 
     public function reports(): MorphMany
     {
-        return $this->morphMany(Report::class , 'reportable');
+        return $this->morphMany(Report::class, 'reportable');
     }
 
-    public function trainingRequests(): HasMany
+    public function trainingRequests(): MorphMany
     {
-        return $this->hasMany(TrainingRequest::class);
+        return $this->morphMany(TrainingRequest::class, 'requestable');
     }
 
     public function user(): BelongsTo
