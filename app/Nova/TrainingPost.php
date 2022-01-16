@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\CreateReport;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Media;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class TrainingPost extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make(__('ID'), 'id')->sortable()->canSee(function(){
+            ID::make(__('ID'), 'id')->sortable()->canSee(function () {
                 return user()->isAdmin();
             }),
 
@@ -119,7 +120,14 @@ class TrainingPost extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new CreateReport)->canRun(function () {
+                return user()->isTrinee();
+            })
+                ->canSee(function () {
+                    return user()->isTrinee();
+                }),
+        ];
     }
 
     /**

@@ -65,7 +65,7 @@ class Company extends Resource
 
             Text::make(__('City'), 'city')->sortable()->rules('required', 'min:3', 'max:255'),
 
-            HasMany::make(__('Training Request') , 'trainingRequests' , TrainingRequest::class)
+            HasMany::make(__('Training Request'), 'trainingRequests', TrainingRequest::class)
         ];
     }
 
