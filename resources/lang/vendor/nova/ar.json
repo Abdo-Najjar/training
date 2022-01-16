@@ -449,7 +449,10 @@
     "Message": "الرسالة",
     "File": "الملف",
     "Add New File": "إضافة ملف",
-    "Update Profile" : "تعديل الملف الشخصي",
-    "E-mail address" : "البريد الإلكتروني",
-    "Save Profile" : "تحديث"
+    "Update Profile": "تعديل الملف الشخصي",
+    "E-mail address": "البريد الإلكتروني",
+    "Save Profile": "تحديث",
+    "Training Requests Count": "عدد طلبات التدريب",
+    "Training Posts Count" : "عدد منشورات التدريب",
+    "Companies Count" : "عدد الشركات"
 }

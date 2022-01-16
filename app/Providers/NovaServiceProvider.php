@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Nova\Metrics\CompanyCount;
+use App\Nova\Metrics\TrainingPostCount;
+use App\Nova\Metrics\TrainingRequestCount;
 use DigitalCreative\CollapsibleResourceManager\CollapsibleResourceManager;
 use DigitalCreative\CollapsibleResourceManager\Resources\NovaResource;
 use DigitalCreative\CollapsibleResourceManager\Resources\TopLevelResource;
@@ -59,7 +62,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards()
     {
         return [
-            // new Help,
+            CompanyCount::make()->width('1/3'),
+            TrainingPostCount::make()->width('1/3'),
+            TrainingRequestCount::make()->width('1/3'),
         ];
     }
 

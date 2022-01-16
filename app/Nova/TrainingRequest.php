@@ -54,7 +54,9 @@ class TrainingRequest extends Resource
         }
 
         if (user()->isHOC()) {
-            return $query->where('company_id', user()->company->id);
+            return $query->whereHasMorph('requestable', \App\Models\Company::class, function ($query) {
+                $query->where('user_id', user()->id);
+            });
         }
 
         return $query;
@@ -82,12 +84,12 @@ class TrainingRequest extends Resource
             }),
 
             MorphTo::make(__('Type'), 'requestable')
-            ->types([
-                Company::class,
-                TrainingPost::class
-            ])
-            ->sortable()
-            ->withoutTrashed(),
+                ->types([
+                    Company::class,
+                    TrainingPost::class
+                ])
+                ->sortable()
+                ->withoutTrashed(),
 
             Files::make(__('File'), 'default')
                 ->rules('nullable')
