@@ -14,6 +14,19 @@ class TrainingRequest extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
+
+    public static function booted()
+    {
+        static::updated(function (TrainingRequest $trainingRequest) {
+            if ($trainingRequest->status) {
+                Alert::create([
+                    'user_id'   => $trainingRequest->user_id,
+                    'content'   => 'تم قبولك في التدريب في المؤمسسة ' . optional(user()->company)->name
+                ]);
+            }
+        });
+    }
+
     /** Relations */
 
     public function user(): BelongsTo

@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\AcceptTrainingRequest;
 use App\Nova\Actions\CreateReport;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Files;
 use Ebess\AdvancedNovaMediaLibrary\Fields\Media;
@@ -73,8 +74,8 @@ class TrainingPost extends Resource
                 }
                 return \App\Models\TrainingPost::HOC;
             }),
-            
-            MorphMany::make(__('Training Request'), 'requests', TrainingRequest::class)->canSee(function(){
+
+            MorphMany::make(__('Training Request'), 'requests', TrainingRequest::class)->canSee(function () {
                 if ($this->type and $this->type == \App\Models\TrainingPost::TRINEE) {
                     return false;
                 }
@@ -134,6 +135,13 @@ class TrainingPost extends Resource
             })
                 ->canSee(function () {
                     return user()->isTrinee();
+                }),
+
+            (new AcceptTrainingRequest)->canRun(function () {
+                return user()->isHOC();
+            })
+                ->canSee(function () {
+                    return user()->isHOC();
                 }),
         ];
     }

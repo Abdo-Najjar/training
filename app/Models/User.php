@@ -111,4 +111,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Specialization::class);
     }
+
+    public function alerts()
+    {
+        return $this->hasMany(Alert::class);
+    }
 }
