@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Str;
+use Laravel\Nova\Fields\MorphTo;
 
 class Report extends Resource
 {
@@ -49,7 +50,12 @@ class Report extends Resource
 
             BelongsTo::make(__('User'), 'user', Trinee::class)->sortable(),
 
-            BelongsTo::make(__('Company'), 'company', Company::class)->sortable(),
+            // BelongsTo::make(__('Company'), 'company', Company::class)->sortable(),
+
+            MorphTo::make(__('Reportable') , 'reportable' , Report::class)->types([
+                \App\Nova\Company::class,
+                \App\Nova\TrainingPost::class,
+            ]),
 
             Textarea::make(__('Reason'), 'reason'),
 
