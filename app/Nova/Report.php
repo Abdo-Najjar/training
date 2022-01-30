@@ -9,7 +9,6 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Str;
-use Laravel\Nova\Fields\MorphTo;
 
 class Report extends Resource
 {
@@ -52,7 +51,8 @@ class Report extends Resource
 
             // BelongsTo::make(__('Company'), 'company', Company::class)->sortable(),
 
-            MorphTo::make(__('Reportable') , 'reportable' , Report::class)->types([
+            
+            \Laravel\Nova\Fields\MorphTo::make('المبلغ عنه' , 'reportable' , Report::class)->types([
                 \App\Nova\Company::class,
                 \App\Nova\TrainingPost::class,
             ]),
